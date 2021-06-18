@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BillHelper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.example.demo.helper</a> &gt; <span class="el_source">BillHelper.java</span></div><h1>BillHelper.java</h1><pre class="source lang-java linenums">package com.example.demo.helper;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.List;
+
+import com.example.demo.dto.BillDTO;
+import com.example.demo.entity.Customer;
+import com.example.demo.entity.ShoppingCartItem;
+
+public class BillHelper {
+
+<span class="fc" id="L15">	private static BillHelper helper = null;</span>
+
+<span class="fc" id="L17">	private BillHelper() {</span>
+<span class="fc" id="L18">	}</span>
+
+	public static BillHelper getInstance() {
+<span class="pc bpc" id="L21" title="1 of 2 branches missed.">		if (helper == null)</span>
+<span class="fc" id="L22">			return new BillHelper();</span>
+<span class="nc" id="L23">		return helper;</span>
+	}
+
+	public BillDTO calculateBill(List&lt;ShoppingCartItem&gt; shoppingCartList, Customer customer) {
+
+		// calculate customer period
+<span class="fc" id="L29">		int customerPeriod = claculateCustomerPeriod(customer.getCustomerSince());</span>
+
+		// calculate discount percentage if any
+<span class="fc" id="L32">		int percentageDiscount = claculateCustomerPercentageDiscount(customer.getCustomerType(), customerPeriod);</span>
+
+		// calculate the over all total, and the total without grocery
+<span class="fc" id="L35">		double cartTotal = 0.0d;</span>
+<span class="fc" id="L36">		double cartTotalNotGrocery = 0.0d;</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">		for (ShoppingCartItem item : shoppingCartList) {</span>
+<span class="fc" id="L38">			cartTotal += (item.getPrice().doubleValue() * item.getQuantity());</span>
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">			if (item.getShoppingCartItemGroupId() != Constant.SHOPPING_ITEM_GROUP.GROCERY)</span>
+<span class="nc" id="L40">				cartTotalNotGrocery += (item.getPrice().doubleValue() * item.getQuantity());</span>
+<span class="fc" id="L41">		}</span>
+
+<span class="fc" id="L43">		double firstDiscount = (percentageDiscount * cartTotal) / 100;</span>
+<span class="fc" id="L44">		double secondDiscount = (cartTotalNotGrocery / 100) * 5;</span>
+
+		// return theShoppingCartItem;
+<span class="fc" id="L47">		return new BillDTO(cartTotal, firstDiscount, secondDiscount, cartTotal - (firstDiscount + secondDiscount));</span>
+	}
+
+	private int claculateCustomerPeriod(Date customerSinceDate) {
+<span class="fc" id="L51">		Period period = Period.between(LocalDate.now(),</span>
+<span class="fc" id="L52">				customerSinceDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());</span>
+
+<span class="fc" id="L54">		return Math.abs(period.getDays());</span>
+	}
+
+	private int claculateCustomerPercentageDiscount(int customerType, int customerPeriod) {
+<span class="fc" id="L58">		int percentageDiscount = 0;</span>
+		// get 20% discount if staff
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">		if (customerType == Constant.EMPLOYEE_SEGMENT.STAFF)</span>
+<span class="fc" id="L61">			percentageDiscount = 20;</span>
+		// get 15% discount if affiliate
+<span class="nc bnc" id="L63" title="All 2 branches missed.">		else if (customerType == Constant.EMPLOYEE_SEGMENT.AFFILIATE)</span>
+<span class="nc" id="L64">			percentageDiscount = 15;</span>
+		// if customer is since more than 3 years give 10 percent
+<span class="nc bnc" id="L66" title="All 4 branches missed.">		else if (customerType == Constant.EMPLOYEE_SEGMENT.REGULAR &amp;&amp; customerPeriod &gt; 1095)</span>
+<span class="nc" id="L67">			percentageDiscount = 10;</span>
+
+<span class="fc" id="L69">		return percentageDiscount;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

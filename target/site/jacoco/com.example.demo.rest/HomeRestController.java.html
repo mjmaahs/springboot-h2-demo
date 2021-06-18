@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HomeRestController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.example.demo.rest</a> &gt; <span class="el_source">HomeRestController.java</span></div><h1>HomeRestController.java</h1><pre class="source lang-java linenums">package com.example.demo.rest;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.dto.BillDTO;
+import com.example.demo.entity.Customer;
+import com.example.demo.entity.ShoppingCartItem;
+import com.example.demo.service.CustomerService;
+import com.example.demo.service.ShoppingCartItemService;
+
+@RestController
+public class HomeRestController {
+
+	private CustomerService customerService;
+	private ShoppingCartItemService shoppingCartItemService;
+
+	@Autowired
+<span class="fc" id="L24">	public HomeRestController(CustomerService theCustomerService, ShoppingCartItemService theShoppingCartItemService) {</span>
+<span class="fc" id="L25">		customerService = theCustomerService;</span>
+<span class="fc" id="L26">		shoppingCartItemService = theShoppingCartItemService;</span>
+<span class="fc" id="L27">	}</span>
+
+	@PostMapping(&quot;/shoppingCartItems&quot;)
+	public BillDTO addShoppingCartItem(@RequestBody ShoppingCartItem theShoppingCartItem) {
+<span class="nc" id="L31">		return shoppingCartItemService.addShoppingCartItem(theShoppingCartItem,</span>
+<span class="nc" id="L32">				customerService.findById(theShoppingCartItem.getUserId()));</span>
+	}
+	
+	@GetMapping(&quot;/customers&quot;)
+	public List&lt;Customer&gt; findAllCustomers() {
+<span class="nc" id="L37">		return customerService.findAll();</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

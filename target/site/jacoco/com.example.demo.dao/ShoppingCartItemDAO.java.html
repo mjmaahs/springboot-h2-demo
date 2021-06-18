@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ShoppingCartItemDAO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.example.demo.dao</a> &gt; <span class="el_source">ShoppingCartItemDAO.java</span></div><h1>ShoppingCartItemDAO.java</h1><pre class="source lang-java linenums">package com.example.demo.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.entity.ShoppingCartItem;
+
+@Repository
+public class ShoppingCartItemDAO {
+
+	private EntityManager entityManager;
+
+	@Autowired
+<span class="nc" id="L19">	public ShoppingCartItemDAO(EntityManager theEntityManager) {</span>
+<span class="nc" id="L20">		entityManager = theEntityManager;</span>
+<span class="nc" id="L21">	}</span>
+
+	public List&lt;ShoppingCartItem&gt; getShoppingCartByUserId(int theId) {
+<span class="nc" id="L24">		Query theQuery = entityManager.createQuery(&quot;select e from ShoppingCartItem e where e.userId =: cartUserId&quot;);</span>
+<span class="nc" id="L25">		theQuery.setParameter(&quot;cartUserId&quot;, theId);</span>
+<span class="nc" id="L26">		List&lt;ShoppingCartItem&gt; cart = (List&lt;ShoppingCartItem&gt;) theQuery.getResultList();</span>
+<span class="nc" id="L27">		return cart;</span>
+	}
+
+	public List&lt;ShoppingCartItem&gt; findAll() {
+<span class="nc" id="L31">		Query theQuery = entityManager.createQuery(&quot;from ShoppingCartItem&quot;);</span>
+<span class="nc" id="L32">		List&lt;ShoppingCartItem&gt; shoppingCartItems = theQuery.getResultList();</span>
+<span class="nc" id="L33">		return shoppingCartItems;</span>
+	}
+
+	public ShoppingCartItem findById(int theId) {
+<span class="nc" id="L37">		ShoppingCartItem theShoppingCartItem = entityManager.find(ShoppingCartItem.class, theId);</span>
+<span class="nc" id="L38">		return theShoppingCartItem;</span>
+	}
+
+	public void save(ShoppingCartItem theShoppingCartItem) {
+<span class="nc" id="L42">		ShoppingCartItem dbShoppingCartItem = entityManager.merge(theShoppingCartItem);</span>
+<span class="nc" id="L43">		theShoppingCartItem.setId(dbShoppingCartItem.getId());</span>
+<span class="nc" id="L44">	}</span>
+
+	public void deleteById(int theId) {
+<span class="nc" id="L47">		Query theQuery = entityManager.createQuery(&quot;delete from ShoppingCartItem where id=:shoppingCartItemId&quot;);</span>
+<span class="nc" id="L48">		theQuery.setParameter(&quot;shoppingCartItemId&quot;, theId);</span>
+<span class="nc" id="L49">		theQuery.executeUpdate();</span>
+<span class="nc" id="L50">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SegmentDiscount.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.example.demo.entity</a> &gt; <span class="el_source">SegmentDiscount.java</span></div><h1>SegmentDiscount.java</h1><pre class="source lang-java linenums">package com.example.demo.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = &quot;segment_discount&quot;)
+public class SegmentDiscount {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = &quot;id&quot;)
+	private int id;
+	@Column(name = &quot;segment_id&quot;)
+	private int segmentId;
+	@Column(name = &quot;percentage_discount&quot;)
+	private int percentageDiscount;
+
+	public SegmentDiscount() {
+<span class="fc" id="L24">		super();</span>
+<span class="fc" id="L25">	}</span>
+
+<span class="nc" id="L27">	public SegmentDiscount(int segmentId, int percentageDiscount) {</span>
+<span class="nc" id="L28">		this.segmentId = segmentId;</span>
+<span class="nc" id="L29">		this.percentageDiscount = percentageDiscount;</span>
+<span class="nc" id="L30">	}</span>
+
+	public int getId() {
+<span class="nc" id="L33">		return id;</span>
+	}
+
+	public void setId(int id) {
+<span class="nc" id="L37">		this.id = id;</span>
+<span class="nc" id="L38">	}</span>
+
+	public int getSegmentId() {
+<span class="nc" id="L41">		return segmentId;</span>
+	}
+
+	public void setSegmentId(int segmentId) {
+<span class="nc" id="L45">		this.segmentId = segmentId;</span>
+<span class="nc" id="L46">	}</span>
+
+	public int getPercentageDiscount() {
+<span class="nc" id="L49">		return percentageDiscount;</span>
+	}
+
+	public void setPercentageDiscount(int percentageDiscount) {
+<span class="nc" id="L53">		this.percentageDiscount = percentageDiscount;</span>
+<span class="nc" id="L54">	}</span>
+
+	@Override
+	public String toString() {
+<span class="nc" id="L58">		return &quot;SegmentDiscount [id=&quot; + id + &quot;, segmentId=&quot; + segmentId + &quot;, percentageDiscount=&quot; + percentageDiscount</span>
+				+ &quot;]&quot;;
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

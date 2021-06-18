@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Customer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">com.example.demo.entity</a> &gt; <span class="el_source">Customer.java</span></div><h1>Customer.java</h1><pre class="source lang-java linenums">package com.example.demo.entity;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = &quot;customer&quot;)
+public class Customer {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = &quot;id&quot;)
+	private int id;
+	@Column(name = &quot;username&quot;)
+	private String username;
+	@Column(name = &quot;customer_type&quot;)
+	private int customerType;
+	@Column(name = &quot;customer_since&quot;)
+	private Date customerSince;
+
+	public Customer() {
+<span class="fc" id="L28">		super();</span>
+<span class="fc" id="L29">	}</span>
+
+<span class="fc" id="L31">	public Customer(String username, int customerType, Date customerSince) {</span>
+<span class="fc" id="L32">		this.username = username;</span>
+<span class="fc" id="L33">		this.customerType = customerType;</span>
+<span class="fc" id="L34">		this.customerSince = customerSince;</span>
+<span class="fc" id="L35">	}</span>
+
+	public int getId() {
+<span class="nc" id="L38">		return id;</span>
+	}
+
+	public void setId(int id) {
+<span class="nc" id="L42">		this.id = id;</span>
+<span class="nc" id="L43">	}</span>
+
+	public String getUsername() {
+<span class="nc" id="L46">		return username;</span>
+	}
+
+	public void setUsername(String username) {
+<span class="nc" id="L50">		this.username = username;</span>
+<span class="nc" id="L51">	}</span>
+
+	public int getCustomerType() {
+<span class="fc" id="L54">		return customerType;</span>
+	}
+
+	public void setCustomerType(int customerType) {
+<span class="nc" id="L58">		this.customerType = customerType;</span>
+<span class="nc" id="L59">	}</span>
+
+	public Date getCustomerSince() {
+<span class="fc" id="L62">		return customerSince;</span>
+	}
+
+	public void setCustomerSince(Date customerSince) {
+<span class="nc" id="L66">		this.customerSince = customerSince;</span>
+<span class="nc" id="L67">	}</span>
+
+	@Override
+	public String toString() {
+<span class="nc" id="L71">		return &quot;Customer [id=&quot; + id + &quot;, username=&quot; + username + &quot;, customerType=&quot; + customerType + &quot;, customerSince=&quot;</span>
+				+ customerSince + &quot;]&quot;;
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
