@@ -1,0 +1,17 @@
+com\example\demo\DemoApplication.class
+com\example\demo\entity\SegmentDiscount.class
+com\example\demo\helper\BillHelper.class
+com\example\demo\helper\Constant$EMPLOYEE_SEGMENT.class
+com\example\demo\helper\Constant.class
+com\example\demo\dao\SegmentDiscountDAO.class
+com\example\demo\service\ShoppingCartItemService.class
+com\example\demo\dao\CustomerDAO.class
+com\example\demo\dto\BillDTO.class
+com\example\demo\service\CustomerService.class
+com\example\demo\entity\Customer.class
+com\example\demo\helper\Constant$SHOPPING_ITEM_GROUP.class
+com\example\demo\entity\ShoppingCartItem.class
+com\example\demo\entity\Segment.class
+com\example\demo\rest\HomeRestController.class
+com\example\demo\dao\ShoppingCartItemDAO.class
+com\example\demo\dao\SegmentDAO.class
