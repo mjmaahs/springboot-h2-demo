@@ -9,6 +9,7 @@ cd springboot-h2-demo
 
 # packaging and runing the app
 mvn clean package
+cd target
 java -jar demo-0.0.1-SNAPSHOT.jar
 
 
